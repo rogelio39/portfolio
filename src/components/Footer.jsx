@@ -5,19 +5,19 @@ export default function Footer() {
         <footer className="text-center mt-10">
             <div className="flex justify-center gap-6">
                 <a
-                    href="https://wa.me/tu-numero"
+                    href="https://wa.me/3813604435"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
                     <FaWhatsapp className="text-green-500 text-4xl hover:scale-110 transition-transform" />
                 </a>
-                <a
+                {/* <a
                     href="https://instagram.com/tu-usuario"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
                     <FaInstagram className="text-pink-500 text-4xl hover:scale-110 transition-transform" />
-                </a>
+                </a> */}
             </div>
         </footer>
     );
