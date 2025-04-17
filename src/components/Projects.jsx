@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const projects = [
     {
         title: 'Mi Portafolio',
-        image: '/public/portfolio.png',
+        image: 'portfolio.png',
         link: 'https://portfolio-i8lq.onrender.com/',
         description: 'Un portafolio moderno creado con React y Tailwind CSS.',
         techs: ['React', 'Tailwind CSS']
@@ -13,7 +13,7 @@ const projects = [
 
     {
         title: 'Tasklist',
-        image: '/public/tasklist.png',
+        image: 'tasklist.png',
         link: 'http://tasklist-w39h.onrender.com/',
         description: 'Tasklist básico construido con React, Firebase y express y mongodb.',
         techs: ['React', 'Firebase', 'express', 'mongodb']
