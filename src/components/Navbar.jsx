@@ -1,4 +1,4 @@
-// src/components/Navbar.jsx
+
 export default function Navbar({ handleNavClick }) {
     return (
         <nav className="bg-gray-800 text-white p-4 fixed top-0 w-full z-10 shadow-md">

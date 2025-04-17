@@ -1,77 +1,110 @@
-// src/components/Projects.jsx
-import React from 'react';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { useState } from 'react';
 
-// // 👉 Pone tus imágenes en /src/assets con estos nombres (o cambia el import)
-// import project1Img from '../assets/project1.png';
-// import project2Img from '../assets/project2.png';
-// import project3Img from '../assets/project3.png';
+import { motion, AnimatePresence } from 'framer-motion';
 
-// const projects = [
-//     {
-//         title: 'Proyecto 1',
-//         description: 'Breve descripción del proyecto 1. Qué hace, tecnologías usadas, enlace al repo o demo.',
-//         image: project1Img,
-//         repoLink: 'https://github.com/tu-usuario/proyecto1',
-//         demoLink: 'https://tu-demo1.com'
-//     },
-//     {
-//         title: 'Proyecto 2',
-//         description: 'Breve descripción del proyecto 2. Qué desafíos resolviste, etc.',
-//         image: project2Img,
-//         repoLink: 'https://github.com/tu-usuario/proyecto2',
-//         demoLink: 'https://tu-demo2.com'
-//     },
-//     {
-//         title: 'Proyecto 3',
-//         description: 'Breve descripción del proyecto 3. Resalta algo interesante.',
-//         image: project3Img,
-//         repoLink: 'https://github.com/tu-usuario/proyecto3',
-//         demoLink: 'https://tu-demo3.com'
-//     },
-// ];
+const projects = [
+    {
+        title: 'Mi Portafolio',
+        image: '/public/portfolio.png',
+        link: 'https://portfolio-i8lq.onrender.com/',
+        description: 'Un portafolio moderno creado con React y Tailwind CSS.',
+        techs: ['React', 'Tailwind CSS']
+    },
+
+    {
+        title: 'Tasklist',
+        image: '/public/tasklist.png',
+        link: 'http://tasklist-w39h.onrender.com/',
+        description: 'Tasklist básico construido con React, Firebase y express y mongodb.',
+        techs: ['React', 'Firebase', 'express', 'mongodb']
+    }
+];
 
 export default function Projects() {
-    return (
-        <div className="max-w-6xl mx-auto py-10 px-4">
-            <h2 className="text-3xl font-bold text-center mb-8">EN CONSTRUCCION</h2>
-            <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    const [selectedProject, setSelectedProject] = useState(null);
 
-                {/* {projects.map((proj, i) => (
+    return (
+        <section id="proyectos" className="py-20 px-6 bg-gray-900 text-white relative">
+            <h2 className="text-3xl font-bold text-center mb-10">Proyectos</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+                {projects.map((project, index) => (
                     <div
-                        key={i}
-                        className="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg overflow-hidden shadow-md flex flex-col"
+                        key={index}
+                        className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:scale-105 transition-transform cursor-pointer"
+                        onClick={() => setSelectedProject(project)}
                     >
                         <img
-                            src={proj.image}
-                            alt={proj.title}
-                            className="h-40 w-full object-cover"
+                            src={project.image}
+                            alt={project.title}
+                            className="w-full h-48 object-cover"
                         />
-                        <div className="p-4 flex flex-col flex-1">
-                            <h3 className="text-xl font-semibold mb-2">{proj.title}</h3>
-                            <p className="text-sm mb-4 flex-1">{proj.description}</p>
-                            <div className="mt-auto flex gap-4">
-                                <a
-                                    href={proj.repoLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-1 hover:text-cyan-400 transition-colors"
-                                >
-                                    <FaGithub /> Repo
-                                </a>
-                                <a
-                                    href={proj.demoLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-1 hover:text-cyan-400 transition-colors"
-                                >
-                                    <FaExternalLinkAlt /> Demo
-                                </a>
-                            </div>
+                        <div className="p-4">
+                            <h3 className="text-xl font-semibold">{project.title}</h3>
+                            <p className="text-gray-300 text-sm">{project.description}</p>
                         </div>
                     </div>
-                ))} */}
+                ))}
             </div>
-        </div>
+
+            {/* Modal animado */}
+            <AnimatePresence>
+                {selectedProject && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+                        onClick={() => setSelectedProject(null)} // click fuera cierra
+                    >
+                        <motion.div
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.8, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="bg-white bg-opacity-20 backdrop-blur-md rounded-lg p-6 w-full max-w-lg text-white relative shadow-xl"
+                            onClick={e => e.stopPropagation()} // evita cerrar al click dentro
+                        >
+                            {/* Botón de cierre */}
+                            <button
+                                className="absolute top-2 right-3 text-2xl text-white hover:text-red-400"
+                                onClick={() => setSelectedProject(null)}
+                            >
+                                &times;
+                            </button>
+
+                            <img
+                                src={selectedProject.image}
+                                alt={selectedProject.title}
+                                className="w-full h-52 object-cover rounded mb-4"
+                            />
+                            <h3 className="text-2xl font-bold">{selectedProject.title}</h3>
+                            <p className="mt-2">{selectedProject.description}</p>
+
+                            {selectedProject.techs && (
+                                <div className="mt-4">
+                                    <h4 className="font-semibold">Tecnologías usadas:</h4>
+                                    <ul className="flex gap-3 mt-1 flex-wrap text-sm">
+                                        {selectedProject.techs.map((tech, i) => (
+                                            <li key={i} className="bg-cyan-700 px-3 py-1 rounded-full">
+                                                {tech}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+
+                            <a
+                                href={selectedProject.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="mt-6 inline-block bg-cyan-600 hover:bg-cyan-700 text-white px-5 py-2 rounded transition-colors"
+                            >
+                                Ver proyecto
+                            </a>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </section>
     );
 }

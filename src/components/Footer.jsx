@@ -11,13 +11,7 @@ export default function Footer() {
                 >
                     <FaWhatsapp className="text-green-500 text-4xl hover:scale-110 transition-transform" />
                 </a>
-                {/* <a
-                    href="https://instagram.com/tu-usuario"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <FaInstagram className="text-pink-500 text-4xl hover:scale-110 transition-transform" />
-                </a> */}
+
             </div>
         </footer>
     );

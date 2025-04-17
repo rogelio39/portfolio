@@ -1,4 +1,4 @@
-import miFoto from '../assets/yo.webp'; // Ajusta el nombre si tu archivo es distinto
+import miFoto from '../assets/yo.webp'; 
 
 export default function Header() {
     return (
